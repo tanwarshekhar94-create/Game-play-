@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Play</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:white}
+header{padding:22px 18px;text-align:center;background:#151d38}
+h1{margin:0;font-size:34px}.tag{color:#aab6d8;margin-top:6px}
+main{max-width:900px;margin:auto;padding:20px}.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#151d38;border-radius:18px;padding:22px;text-align:center;box-shadow:0 8px 25px #0004}
+.icon{font-size:55px}.card h2{margin:10px 0}.card button{border:0;border-radius:12px;padding:12px 20px;font-weight:bold;cursor:pointer}
+#clicker{display:none;margin-top:20px;text-align:center;background:#151d38;border-radius:18px;padding:25px}
+#tap{font-size:25px;padding:20px 35px;border-radius:15px;border:0;cursor:pointer}
+#score{font-size:22px}
+</style>
+</head>
+<body>
+<header>
+<h1>🎮 GAME PLAY</h1>
+<div class="tag">Play. Score. Repeat.</div>
+</header>
+
+<main>
+<h2>🔥 Mini Games</h2>
+<div class="games">
+<div class="card"><div class="icon">🎯</div><h2>Tap Challenge</h2><p>Tap as fast as you can!</p><button onclick="startGame()">PLAY</button></div>
+<div class="card"><div class="icon">🧩</div><h2>Puzzle</h2><p>Coming soon...</p><button disabled>SOON</button></div>
+<div class="card"><div class="icon">🏎️</div><h2>Racing</h2><p>Coming soon...</p><button disabled>SOON</button></div>
+</div>
+
+<section id="clicker">
+<h2>🎯 Tap Challenge</h2><p>10 seconds mein jitni baar ho sake tap karo!</p>
+<p id="score">Score: 0</p>
+<button id="tap" onclick="tap()">TAP!</button>
+<p id="timer">Time: 10</p>
+<button onclick="startGame()">Restart</button>
+</section>
+</main>
+
+<script>
+let score=0,time=10,active=false,interval;
+function startGame(){
+  document.getElementById('clicker').style.display='block';
+  score=0; time=10; active=true;
+  document.getElementById('score').textContent='Score: 0';
+  document.getElementById('timer').textContent='Time: 10';
+  clearInterval(interval);
+  interval=setInterval(()=>{
+    time--;
+    document.getElementById('timer').textContent='Time: '+time;
+    if(time<=0){clearInterval(interval);active=false;alert('Game Over! Your score: '+score);}
+  },1000);
+}
+function tap(){
+  if(active){score++;document.getElementById('score').textContent='Score: '+score;}
+}
+</script>
+</body>
+</html>
